@@ -1,0 +1,33 @@
+dns_zones:
+  - name: "ctf.local"
+    reverse: "192"
+    records:
+      - { name: "ns1", type: "A", value: "192.168.0.2" }
+      - { name: "www", type: "A", value: "192.168.0.3" }
+      - { name: "ftp", type: "A", value: "192.168.0.4" }
+      - { name: "flag1", type: "TXT", value: "\"CTF{zone_leak_detected}\"" }
+
+  - name: "admin.ctf.local"
+    reverse: "192"
+    records:
+      - { name: "panel", type: "A", value: "192.168.0.10" }
+      - { name: "hidden", type: "TXT", value: "\"CTF{admin_access}\"" }
+
+  - name: "banco.ctf"
+    reverse: "193"
+    records:
+      - { name: "login", type: "A", value: "192.168.1.5" }
+      - { name: "support", type: "TXT", value: "\"CTF{spoofed_support}\"" }
+
+  - name: "mail.ctf.local"
+    reverse: "192"
+    records:
+      - { name: "mx1", type: "A", value: "192.168.0.20" }
+      - { name: "@", type: "MX", value: "10 mx1.mail.ctf.local." }
+      - { name: "leak", type: "TXT", value: "\"CTF{exposed_mx}\"" }
+
+  - name: "dynamic.ctf"
+    reverse: "194"
+    records:
+      - { name: "dyn1", type: "A", value: "192.168.2.10" }
+      - { name: "dynflag", type: "TXT", value: "\"CTF{dynamic_update}\"" }

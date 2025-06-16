@@ -1,0 +1,25 @@
+acl trusted { localhost: 192.168.100.0/24; }; 
+options {
+        listen-on port 53 { localhost: 192.168.100.0/24; };
+        directory   "/var/lib/named";
+        dump-file   "/var/lib/named/data/cache_dump.db";
+        statistics-file "/var/lib/named/data/named_stats.txt";
+        memstatistics-file  "/var/lib/named/data/named_mem_stats.txt";
+        secroots-file   "/var/lib/named/data/named.secroots";
+        recursing-file   "/var/lib/named/data/named.recursing"
+        allow-query { trusted; };
+    recursion yes;
+};
+
+logging {
+  channel example_log {
+    // uses a relative path name and the directory statement to
+    // expand to /var/log/named/example.log
+    file "log/named/example.log" versions 3 size 250k;
+    // only log info and up messages - all others discarded
+    severity info;
+  };
+  category default {
+    example_log;
+  };
+};

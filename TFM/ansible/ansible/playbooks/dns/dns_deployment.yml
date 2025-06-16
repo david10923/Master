@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+  - import_role:
+      name: dns_role
+      tasks_from: dns_servers.yml
+  
+- hosts: localhost
+  become: yes
+  tasks:
+  - import_role:
+      name: dns_role
+      tasks_from: dns_clients.yml
+  

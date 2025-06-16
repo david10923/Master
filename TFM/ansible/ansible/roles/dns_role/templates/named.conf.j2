@@ -1,0 +1,25 @@
+acl trusted { localhost: 192.168.100.0/24; }; 
+options {
+    directory "/var/lib/named";        # Ruta para archivos de zona
+
+    recursion yes;                      # Permite resolver nombres recursivamente
+    allow-recursion { any; };           
+
+    allow-query { any; };               # Permitir consultas desde cualquier IP
+    listen-on { any; };                 # Escuchar en todas las interfaces
+    listen-on-v6 { none; };
+
+};
+
+logging {
+  channel example_log {
+    // uses a relative path name and the directory statement to
+    // expand to /var/log/named/example.log
+    file "log/named/example.log" versions 3 size 250k;
+    // only log info and up messages - all others discarded
+    severity info;
+  };
+  category default {
+    example_log;
+  };
+};
