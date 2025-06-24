@@ -1,0 +1,28 @@
+### Install ftp
+- name: Install ftp
+  apt:
+    name: vsftpd
+    state: latest
+    force: yes
+
+- name: Add Anonymous FTP configuration
+  blockinfile:
+    path: /etc/vsftpd.conf
+    block: |
+      anonymous_enable=YES
+      write_enable=YES
+      anon_upload_enable=YES
+
+- name: Open vsftpd port
+  firewalld:
+    service: ftp
+    permanent: true
+    state: enabled
+
+- name: Reload firewall-cmd
+  command: "firewall-cmd --reload"
+
+- name: Start ftp
+  service:
+    name: vsftpd
+    state: started

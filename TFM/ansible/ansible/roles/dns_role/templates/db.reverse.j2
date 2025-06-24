@@ -1,15 +1,15 @@
-$TTL    604800
-@       IN      SOA     ns1.ctf.local. admin.ctf.local. (
-                              1         ; Serial
-                         604800         ; Refresh
-                          86400         ; Retry
-                        2419200         ; Expire
-                         604800 )       ; Negative Cache TTL
+$TTL    {{ soa.ttl }}
+@       IN      SOA     {{ soa.primary_ns }} {{ soa.admin_email }} (
+                              {{ soa.serial }}         ; Serial
+                              {{ soa.refresh }}         ; Refresh
+                              {{ soa.retry }}         ; Retry
+                              {{ soa.expire }}       ; Expire
+                              {{ soa.minimum }} )     ; Negative Cache TTL
 
-@       IN      NS      ns1.ctf.local.
+@       IN      NS      {{ soa.primary_ns }}
 
 {% for record in item.records %}
-{% if record.type == "A" %}
-{{ record.value.split('.')[3] }}       IN      PTR     {{ record.name }}.{{ item.name }}.
+{% if record.type == 'A' %}
+{{ record.value.split('.')[-1] }}     IN      PTR     {{ record.name }}.{{ item.name }}.
 {% endif %}
 {% endfor %}

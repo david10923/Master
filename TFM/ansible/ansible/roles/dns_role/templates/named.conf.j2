@@ -1,25 +1,29 @@
-acl trusted { localhost: 192.168.100.0/24; }; 
+acl trusted { localhost; 192.168.0.0/16; }; 
 options {
-    directory "/var/lib/named";        # Ruta para archivos de zona
-
+    directory "/etc/bind/zones";        # Ruta para archivos de zona
+    #listen-on port 53 { 127.0.0.1;  192.168.0.10 };
     recursion yes;                      # Permite resolver nombres recursivamente
     allow-recursion { any; };           
 
     allow-query { any; };               # Permitir consultas desde cualquier IP
+    allow-query-cache { any; };               # Permitir consultas desde cualquier IP
     listen-on { any; };                 # Escuchar en todas las interfaces
     listen-on-v6 { none; };
 
 };
 
-logging {
-  channel example_log {
-    // uses a relative path name and the directory statement to
-    // expand to /var/log/named/example.log
-    file "log/named/example.log" versions 3 size 250k;
-    // only log info and up messages - all others discarded
-    severity info;
+logging{
+  channel simple_log {
+    file "/var/log/named/bind.log" versions 3 size 5m;
+    severity warning;
+    print-time yes;
+    print-severity yes;
+    print-category yes;
   };
-  category default {
-    example_log;
+  category default{
+    simple_log;
   };
 };
+
+include "/etc/bind/named.conf.local";
+#include "/etc/bind/named.conf.options";

@@ -1,12 +1,12 @@
 {% for zone in dns_zones %}
 zone "{{ zone.name }}" {
     type master;
-    file "/etc/bind/zones/db.{{ zone.name }}";
+    file "/etc/bind/zones/{{ zone.name }}";
     allow-transfer { any; };
 };
 
-zone "{{ zone.reverse }}.168.192.in-addr.arpa" {
+zone "{{ zone.reverse }}.in-addr.arpa" {
     type master;
-    file "/etc/bind/zones/db.192.168.{{ zone.reverse }}.in-addr.arpa.zone";
+    file "/etc/bind/zones/{{ zone.reverse }}.in-addr.arpa.zone";
 };
 {% endfor %}

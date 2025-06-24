@@ -5,7 +5,6 @@
     state: latest
     force: yes
 
-
 ##bind9 configuration
 
 - name: Configure bind9
@@ -24,6 +23,17 @@
     mode: 0750
   loop: 
     - "/etc/bind/zones"
+    - "/var/log/named/"
+    #- "/var/lib/named/zones"
+
+
+- name: Asure directories exists
+  file:
+    path: /var/log/named/bind.log
+    state: touch
+    owner: bind
+    group: bind
+    mode: 0750
 
 
 - name: Create named.conf.local.j2
@@ -31,19 +41,18 @@
     src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
 
+
 - name: Define direct zones
   template:
     src: db.zone.j2
-    dest: /etc/bind/zones/db.{{ item.name }}
+    dest: /etc/bind/zones/{{ item.name }}
   loop: "{{ dns_zones }}"
 
 - name: Define reverse zones
   template:
     src: db.reverse.j2
-    dest: "/etc/bind/zones/db.192.168.{{ item.reverse }}.in-addr.arpa"
+    dest: "/etc/bind/zones/{{ item.reverse }}.in-addr.arpa"
   loop: "{{ dns_zones }}"
-
-
 
 - name: Open DNS port
   firewalld:
@@ -58,5 +67,4 @@
   service:
     name: bind9
     state: started
-  # enabled: true
 

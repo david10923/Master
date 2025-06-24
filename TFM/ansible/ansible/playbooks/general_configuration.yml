@@ -1,0 +1,22 @@
+- name: Set hostname
+  hosts: localhost
+  become: true
+  gather_facts: yes
+  vars:
+    interfaz_objetivo: "{{ ansible_interfaces[1] }}"  # interfaz 1, la segunda del array
+  tasks:
+    - name: Get eth1 address
+      set_fact:
+        ip_objetivo: "{{ hostvars[inventory_hostname]['ansible_' + interfaz_objetivo]['ipv4']['address'] }}"
+
+    - name: Set hostname
+      hostname:
+        name: "{{ dns_main_server }}"
+
+    - name: Add ip hostname to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        create: yes
+        state: present
+        regexp: "^{{ ip_objetivo }}\\s+"
+        line: "{{ ip_objetivo }} {{ dns_main_server }} {{ dns_main_server_alias }}"

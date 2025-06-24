@@ -1,33 +1,48 @@
+main_zone: ctf.local
+
+soa:
+  primary_ns: ns1.midominio.local.
+  admin_email: admin.midominio.local.
+  serial: "{{ ansible_date_time.date | regex_replace('-', '') }}01"
+  refresh: 3600
+  retry: 1800
+  expire: 604800
+  minimum: 86400
+  ttl: 86400
+
 dns_zones:
   - name: "ctf.local"
-    reverse: "192"
+    reverse: "0.0.168.192"
     records:
-      - { name: "ns1", type: "A", value: "192.168.0.2" }
-      - { name: "www", type: "A", value: "192.168.0.3" }
-      - { name: "ftp", type: "A", value: "192.168.0.4" }
-      - { name: "flag1", type: "TXT", value: "\"CTF{zone_leak_detected}\"" }
+      # Subdominios de interés común
+      - { name: "www",     type: "A",   value: "192.168.0.10" }
+      - { name: "ftp",     type: "A",   value: "192.168.0.20" }
+      - { name: "mail",    type: "A",   value: "192.168.0.30" }
+      - { name: "admin",   type: "A",   value: "192.168.0.40" }
 
-  - name: "admin.ctf.local"
-    reverse: "192"
-    records:
-      - { name: "panel", type: "A", value: "192.168.0.10" }
-      - { name: "hidden", type: "TXT", value: "\"CTF{admin_access}\"" }
+      # Falsificación de soporte (spoof)
+      - { name: "support", type: "A",   value: "192.168.0.99" }
+      - { name: "support", type: "TXT", value: "\"CTF{spoofed_support_domain}\"" }
 
-  - name: "banco.ctf"
-    reverse: "193"
-    records:
-      - { name: "login", type: "A", value: "192.168.1.5" }
-      - { name: "support", type: "TXT", value: "\"CTF{spoofed_support}\"" }
+      # Exposición de zonas vía AXFR (reto de enumeración)
+      - { name: "leak",    type: "TXT", value: "\"CTF{zone_transfer_detected}\"" }
 
-  - name: "mail.ctf.local"
-    reverse: "192"
-    records:
-      - { name: "mx1", type: "A", value: "192.168.0.20" }
-      - { name: "@", type: "MX", value: "10 mx1.mail.ctf.local." }
-      - { name: "leak", type: "TXT", value: "\"CTF{exposed_mx}\"" }
+      # Servidores DNS falsos
+      - { name: "ns1",     type: "A",   value: "192.168.0.53" }
+      - { name: "@",       type: "NS",  value: "ns1.ctf.red.local." }
 
-  - name: "dynamic.ctf"
-    reverse: "194"
-    records:
-      - { name: "dyn1", type: "A", value: "192.168.2.10" }
-      - { name: "dynflag", type: "TXT", value: "\"CTF{dynamic_update}\"" }
+      # Registros MX mal apuntados
+      - { name: "@",       type: "MX",  value: "10 mx1.external.ctf." }
+      - { name: "mx1",     type: "A",   value: "192.168.0.60" }
+
+      # Registros PTR para zona inversa
+      - { name: "10",      type: "PTR", value: "www.ctf.red.local." }
+      - { name: "20",      type: "PTR", value: "ftp.ctf.red.local." }
+
+      # Dominio vulnerable a DNS cache poisoning
+      - { name: "resolver", type: "A",  value: "8.8.8.8" }
+      - { name: "dyn",      type: "A",  value: "192.168.0.200" }
+      - { name: "dynflag",  type: "TXT", value: "\"CTF{dns_poisoning_success}\"" }
+
+      # Flag oculta como subdominio
+      - { name: "hiddenflag.ctf.red.local", type: "A", value: "192.168.0.250" }
