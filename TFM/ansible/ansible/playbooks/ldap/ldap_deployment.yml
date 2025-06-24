@@ -1,0 +1,7 @@
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: 
+    include_role:
+      name: ldap_role
+      tasks_from: ldap_installation.yml

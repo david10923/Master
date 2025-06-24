@@ -19,6 +19,7 @@ dns_zones:
       - { name: "ftp",     type: "A",   value: "192.168.0.20" }
       - { name: "mail",    type: "A",   value: "192.168.0.30" }
       - { name: "admin",   type: "A",   value: "192.168.0.40" }
+      - { name: "ldap-server",   type: "A",   value: "192.168.0.41" }
 
       # Falsificación de soporte (spoof)
       - { name: "support", type: "A",   value: "192.168.0.99" }
