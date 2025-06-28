@@ -5,6 +5,20 @@
   vars:
     interfaz_objetivo: "{{ ansible_interfaces[1] }}"  # interfaz 1, la segunda del array
   tasks:
+    - name: Configurar IP estática para enp0s3 (modo NAT)
+      copy:
+        dest: /etc/netplan/01-enp0s3.yaml
+        content: |
+          network:
+            version: 2
+            ethernets:
+              enp0s3:
+                dhcp4: no
+                addresses: [10.0.2.100/24]
+                gateway4: 10.0.2.2
+                nameservers:
+                  addresses: [8.8.8.8]
+
     - name: Get eth1 address
       set_fact:
         ip_objetivo: "{{ hostvars[inventory_hostname]['ansible_' + interfaz_objetivo]['ipv4']['address'] }}"

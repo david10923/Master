@@ -1,5 +1,5 @@
 ---
 # vars file for roles/ldap_role
 ldap_admin_password: "admin"
-ldap_domain: "ldap-server"
+ldap_domain: "foo.exampple.org"
 ldap_organization: "CTForganisation"

@@ -1,0 +1,192 @@
+# Dominio raíz
+dn: dc=ctf,dc=local
+objectClass: top
+objectClass: domain
+dc: ctf
+
+# Admin
+dn: cn=admin,dc=ctf,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword: admin
+
+# Unidad organizativa principal
+dn: ou=users,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: users
+
+# Usuario normal
+dn: uid=alice,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Alice Doe
+sn: Doe
+uid: alice
+userPassword: alice123
+
+# Usuario trampa
+dn: uid=trampa1,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Trampa Uno
+sn: Uno
+uid: trampa1
+userPassword: gotcha
+description: FLAG{esto_es_falso_no_piques}
+
+# Usuario con flag falsa en atributo típico
+dn: uid=bob,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Bob Smith
+sn: Smith
+uid: bob
+userPassword: bob123
+description: FLAG{definitivamente_falsa}
+
+# Usuario sospechoso (entrada vacía)
+dn: uid=sospechoso,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: ?
+sn: ?
+uid: sospechoso
+userPassword: unknown
+
+# OU oculta y usuarios eliminados
+dn: ou=deactivated,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: deactivated
+
+dn: uid=carol,ou=deactivated,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Carol Ghost
+sn: Ghost
+uid: carol
+userPassword: carol123
+description: Usuario deshabilitado por filtración
+
+# Grupo normal
+dn: cn=admins,ou=users,dc=ctf,dc=local
+objectClass: groupOfNames
+cn: admins
+member: uid=alice,ou=users,dc=ctf,dc=local
+
+# Entrada profunda con flag oculta
+dn: ou=archive,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: archive
+
+dn: ou=legacy,ou=archive,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: legacy
+
+dn: uid=ldaphidden,ou=legacy,ou=archive,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Old User
+sn: Legacy
+uid: ldaphidden
+userPassword: nostromo
+jpegPhoto:: RkxBR3tsZGFwX2hpZGRlbl9iYXNlNjRfOTlhYmExfQ==
+
+# La línea de arriba es FLAG{ldap_hidden_base64_99aba1}, codificada en base64
+
+# Entrada basura para despistar
+dn: cn=random,ou=users,dc=ctf,dc=local
+objectClass: applicationProcess
+cn: random
+description: process node for replication tools
+# Dominio raíz
+dn: dc=ctf,dc=local
+objectClass: top
+objectClass: domain
+dc: ctf
+
+# Admin
+dn: cn=admin,dc=ctf,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword: admin
+
+# Unidad organizativa principal
+dn: ou=users,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: users
+
+# Usuario normal
+dn: uid=alice,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Alice Doe
+sn: Doe
+uid: alice
+userPassword: alice123
+
+# Usuario trampa
+dn: uid=trampa1,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Trampa Uno
+sn: Uno
+uid: trampa1
+userPassword: gotcha
+description: FLAG{esto_es_falso_no_piques}
+
+# Usuario con flag falsa en atributo típico
+dn: uid=bob,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Bob Smith
+sn: Smith
+uid: bob
+userPassword: bob123
+description: FLAG{definitivamente_falsa}
+
+# Usuario sospechoso (entrada vacía)
+dn: uid=sospechoso,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: ?
+sn: ?
+uid: sospechoso
+userPassword: unknown
+
+# OU oculta y usuarios eliminados
+dn: ou=deactivated,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: deactivated
+
+dn: uid=carol,ou=deactivated,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Carol Ghost
+sn: Ghost
+uid: carol
+userPassword: carol123
+description: Usuario deshabilitado por filtración
+
+# Grupo normal
+dn: cn=admins,ou=users,dc=ctf,dc=local
+objectClass: groupOfNames
+cn: admins
+member: uid=alice,ou=users,dc=ctf,dc=local
+
+# Entrada profunda con flag oculta
+dn: ou=archive,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: archive
+
+dn: ou=legacy,ou=archive,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: legacy
+
+dn: uid=ldaphidden,ou=legacy,ou=archive,dc=ctf,dc=local
+objectClass: inetOrgPerson
+cn: Old User
+sn: Legacy
+uid: ldaphidden
+userPassword: nostromo
+jpegPhoto:: RkxBR3tsZGFwX2hpZGRlbl9iYXNlNjRfOTlhYmExfQ==
+
+# La línea de arriba es FLAG{ldap_hidden_base64_99aba1}, codificada en base64
+
+# Entrada basura para despistar
+dn: cn=random,ou=users,dc=ctf,dc=local
+objectClass: applicationProcess
+cn: random
+description: process node for replication tools

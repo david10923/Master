@@ -4,4 +4,12 @@
   - name: 
     include_role:
       name: ldap_role
-      tasks_from: ldap_installation.yml
+      tasks_from: ldap_server_installation.yml
+
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: 
+    include_role:
+      name: ldap_role
+      tasks_from: ldap_clients_deployment.yml

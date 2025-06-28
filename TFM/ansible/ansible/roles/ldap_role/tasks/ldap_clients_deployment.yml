@@ -1,0 +1,6 @@
+
+- name: Configure slapd client
+  template: 
+    src: ldap.conf.j2
+    dest: /etc/ldap/ldap.conf.j2
+
