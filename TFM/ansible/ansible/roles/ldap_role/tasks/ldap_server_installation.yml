@@ -1,42 +1,87 @@
-## Install slapd
-- name: Install slapd
-  apt:
-    name: debconf-utils
-    state: latest
-    force: yes
-
-- name: Configure slapd
+- name: Preseed slapd to skip initial config
   debconf:
     name: slapd
-    question: "{{ item.question }}"
-    value: "{{ item.value }}"
-    vtype: "{{ item.vtype }}"
-  loop:
-    - { question: "slapd/internal/adminpw", value: "{{ ldap_admin_password }}", vtype: "password" }
-    - { question: "slapd/internal/generated_adminpw", value: "{{ ldap_admin_password }}", vtype: "password" }
-    - { question: "slapd/password1", value: "{{ ldap_admin_password }}", vtype: "password" }
-    - { question: "slapd/password2", value: "{{ ldap_admin_password }}", vtype: "password" }
-    - { question: "slapd/domain", value: "{{ ldap_domain }}", vtype: "string" }
-    - { question: "slapd/organization", value: "{{ ldap_organization }}", vtype: "string" }
-    - { question: "slapd/no_configuration", value: "false", vtype: "boolean" }
+    question: slapd/no_configuration
+    value: "true"
+    vtype: boolean
 
-
-- name: Configure slapd
-  template: 
-    src: slapd.conf.j2
-    dest: /etc/ldap/slapd.conf
-
-
-- name: Change slapd permissions
+- name: Prevent slapd from auto-starting during install (sentinel file)
   file:
-    path: /etc/ldap/slapd.conf
-    state: file
+    path: /etc/ldap/noslapd
+    state: touch
+
+- name: Install OpenLDAP server packages (slapd and utils)
+  apt:
+    name:
+      - slapd
+      - ldap-utils
+    state: present
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  register: slapd_install
+  ignore_errors: yes  # ignorar error de inicio fallido si ocurre
+
+- name: Remove sentinel file to re-enable slapd start
+  file:
+    path: /etc/ldap/noslapd
+    state: absent
+
+- name: Remove dynamic config directory if present
+  file:
+    path: /etc/ldap/slapd.d
+    state: absent
+
+- name: Clean LDAP database directory (fresh start)
+  file:
+    path: /var/lib/ldap
+    state: absent
+
+- name: Deploy static slapd.conf
+  copy:
+    src: slapd.conf  
+    dest: /etc/ldap/slapd.conf
+    owner: root
+    group: openldap
+    mode: '0640'
+
+- name: Force slapd to use slapd.conf (update /etc/default/slapd)
+  lineinfile:
+    path: /etc/default/slapd
+    regexp: '^SLAPD_CONF='
+    line: 'SLAPD_CONF="/etc/ldap/slapd.conf"'
+
+- name: Copiar base.ldif con datos iniciales
+  copy:
+    src: base.ldif
+    dest: /tmp/base.ldif
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Load base.ldif
+  command: slapadd -f /etc/ldap/slapd.conf -l /tmp/base.ldif
+  
+- name: Change /var/lib/ldap permissions
+  file:
+    path: /var/lib/ldap
+    recurse: yes
     owner: openldap
     group: openldap
-    mode: 0600
+    mode: '0750'
+
+- name: Start and enable OpenLDAP service
+  service:
+    name: slapd
+    state: started
+    enabled: yes
 
 
-#Add ldif
+- name: Verify dc=ctf,dc=local
+  command: ldapsearch -x -LLL -H ldap://ns-server-1 -b dc=ctf,dc=local dn
+  register: ldapcheck
+  failed_when: "'dn: dc=ctf,dc=local' not in ldapcheck.stdout"
+  changed_when: false
 
-- name: Load users to LDAP  
-  shell: "ldapadd -x -D 'cn=admin,dc=ctf,dc=local' -w admin -f ctf-entries.ldif"
+- name: Check the result
+  debug:
+    var: ldapcheck.stdout

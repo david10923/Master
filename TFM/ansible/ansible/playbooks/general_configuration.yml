@@ -1,11 +1,11 @@
 - name: Set hostname
-  hosts: localhost
+  hosts: ns1-server-1
   become: true
   gather_facts: yes
   vars:
-    interfaz_objetivo: "{{ ansible_interfaces[1] }}"  # interfaz 1, la segunda del array
+    interfaz_objetivo: "{{ ansible_interfaces[1] }}"
   tasks:
-    - name: Configurar IP estática para enp0s3 (modo NAT)
+    - name: Static configuration (modo NAT)
       copy:
         dest: /etc/netplan/01-enp0s3.yaml
         content: |

@@ -1,2 +1,3 @@
 [all]
-localhost ansible_connection=local
+localhost
+ns1-server-1 ansible_connection=local

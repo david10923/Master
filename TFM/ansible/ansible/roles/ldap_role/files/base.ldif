@@ -1,0 +1,17 @@
+dn: dc=ctf,dc=local
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: CTF Org
+dc: ctf
+
+dn: ou=People,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: People
+
+dn: cn=admin,dc=ctf,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+userPassword: {SSHA}OjGuNPhKuj2PYqdOkYIrWYxZNL9N97D9
+description: LDAP administrator

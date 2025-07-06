@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: ns1-server-1
   become: yes
   tasks:
   - name: 

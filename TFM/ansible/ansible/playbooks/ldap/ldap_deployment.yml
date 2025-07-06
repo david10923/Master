@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: ns1-server-1
   become: yes
   tasks:
   - name: 
@@ -6,7 +6,7 @@
       name: ldap_role
       tasks_from: ldap_server_installation.yml
 
-- hosts: localhost
+- hosts: ns1-server-1
   become: yes
   tasks:
   - name: 

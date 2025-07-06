@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: ns1-server-1
   become: yes
   tasks:
   - name: Dns servers deployment
@@ -8,7 +8,7 @@
       tasks_from: dns_servers.yml
 
   
-- hosts: localhost
+- hosts: ns1-server-1
   become: yes
   tasks:
   - include_role:

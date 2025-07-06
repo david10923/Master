@@ -1,2 +1,4 @@
 - DNS clients, now it is working with the non resvol.conf mcli to make it static.
 - Vagrant para levantar maquinas ??
+- Copiar ansible.cfg a /etc/ansibl.cfg para poder lanzar los playboos desde cualquier directorio 
+- Si el dns no funciona hacer un restart 

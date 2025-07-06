@@ -1,8 +1,8 @@
 main_zone: ctf.local
 
 soa:
-  primary_ns: ns1.midominio.local.
-  admin_email: admin.midominio.local.
+  primary_ns: ns-server-1.ctf.local.
+  admin_email: admin.ctf.local.
   serial: "{{ ansible_date_time.date | regex_replace('-', '') }}01"
   refresh: 3600
   retry: 1800
@@ -19,6 +19,7 @@ dns_zones:
       - { name: "ftp",     type: "A",   value: "192.168.0.20" }
       - { name: "mail",    type: "A",   value: "192.168.0.30" }
       - { name: "admin",   type: "A",   value: "192.168.0.40" }
+      - { name: "ns-server-1", type: "A", value: "192.168.1.86" }
       - { name: "ldap-server",   type: "A",   value: "192.168.0.41" }
 
       # Falsificación de soporte (spoof)
@@ -30,15 +31,15 @@ dns_zones:
 
       # Servidores DNS falsos
       - { name: "ns1",     type: "A",   value: "192.168.0.53" }
-      - { name: "@",       type: "NS",  value: "ns1.ctf.red.local." }
+      - { name: "@", type: "NS", value: "ns-server-1.ctf.local." }
 
       # Registros MX mal apuntados
       - { name: "@",       type: "MX",  value: "10 mx1.external.ctf." }
       - { name: "mx1",     type: "A",   value: "192.168.0.60" }
 
       # Registros PTR para zona inversa
-      - { name: "10",      type: "PTR", value: "www.ctf.red.local." }
-      - { name: "20",      type: "PTR", value: "ftp.ctf.red.local." }
+      # - { name: "10",      type: "PTR", value: "www.ctf.red.local." }
+      # - { name: "20",      type: "PTR", value: "ftp.ctf.red.local." }
 
       # Dominio vulnerable a DNS cache poisoning
       - { name: "resolver", type: "A",  value: "8.8.8.8" }

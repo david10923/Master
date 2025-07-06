@@ -3,7 +3,6 @@
   apt:
     name: bind9, bind9utils, bind9-doc, firewalld
     state: latest
-    force: yes
 
 ##bind9 configuration
 
@@ -62,9 +61,13 @@
 
 - name: Reload firewall-cmd
   command: "firewall-cmd --reload"
-  
+
+- name: Wait for firewall reload
+  wait_for: 
+    timeout: 60
+
 - name: Start bind9
   service:
     name: bind9
-    state: started
+    state: restarted
 
