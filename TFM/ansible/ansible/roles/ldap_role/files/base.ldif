@@ -13,5 +13,5 @@ dn: cn=admin,dc=ctf,dc=local
 objectClass: simpleSecurityObject
 objectClass: organizationalRole
 cn: admin
-userPassword: {SSHA}OjGuNPhKuj2PYqdOkYIrWYxZNL9N97D9
+userPassword: {SSHA}RI8NkN+75nkQUrOQsnxLQbTrlGl8LabC
 description: LDAP administrator

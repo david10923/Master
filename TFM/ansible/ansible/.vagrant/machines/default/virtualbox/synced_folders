@@ -1,1 +1,1 @@
-{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/David/Desktop/Repo/Master/TFM/ansible/ansible","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/david/Desktop/TFM/Master/TFM/ansible/ansible","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

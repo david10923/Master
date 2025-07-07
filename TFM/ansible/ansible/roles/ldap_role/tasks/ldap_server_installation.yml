@@ -31,10 +31,10 @@
     path: /etc/ldap/slapd.d
     state: absent
 
-- name: Clean LDAP database directory (fresh start)
-  file:
-    path: /var/lib/ldap
-    state: absent
+# - name: Clean LDAP database directory (fresh start)
+#   file:
+#     path: /var/lib/ldap
+#     state: absent
 
 - name: Deploy static slapd.conf
   copy:
@@ -44,13 +44,7 @@
     group: openldap
     mode: '0640'
 
-- name: Force slapd to use slapd.conf (update /etc/default/slapd)
-  lineinfile:
-    path: /etc/default/slapd
-    regexp: '^SLAPD_CONF='
-    line: 'SLAPD_CONF="/etc/ldap/slapd.conf"'
-
-- name: Copiar base.ldif con datos iniciales
+- name: Copy base ldif
   copy:
     src: base.ldif
     dest: /tmp/base.ldif
@@ -58,12 +52,24 @@
     group: root
     mode: '0644'
 
+- name: Stop and enable OpenLDAP service
+  service:
+    name: slapd
+    state: stopped
+    enabled: yes
+
+- name: Wait for slapd stop
+  wait_for: 
+    timeout: 30
+
+
 - name: Load base.ldif
-  command: slapadd -f /etc/ldap/slapd.conf -l /tmp/base.ldif
+  command: "sudo slapadd -v -c -l /tmp/base.ldif -n 1 -f /etc/ldap/slapd.conf"
   
 - name: Change /var/lib/ldap permissions
   file:
     path: /var/lib/ldap
+    state: directory
     recurse: yes
     owner: openldap
     group: openldap
@@ -72,12 +78,12 @@
 - name: Start and enable OpenLDAP service
   service:
     name: slapd
-    state: started
+    state: restarted
     enabled: yes
 
 
 - name: Verify dc=ctf,dc=local
-  command: ldapsearch -x -LLL -H ldap://ns-server-1 -b dc=ctf,dc=local dn
+  command: ldapsearch -x -H ldap://ns-server-1 -D "cn=admin,dc=ctf,dc=local" -w admin -b "dc=ctf,dc=local"
   register: ldapcheck
   failed_when: "'dn: dc=ctf,dc=local' not in ldapcheck.stdout"
   changed_when: false
