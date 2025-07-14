@@ -15,11 +15,12 @@ dns_zones:
     reverse: "0.0.168.192"
     records:
       # Subdominios de interés común
-      - { name: "www",     type: "A",   value: "192.168.0.10" }
+      - { name: "www",     type: "A",   value: "192.168.0.10" } 
       - { name: "ftp",     type: "A",   value: "192.168.0.20" }
       - { name: "mail",    type: "A",   value: "192.168.0.30" }
       - { name: "admin",   type: "A",   value: "192.168.0.40" }
       - { name: "ns-server-1", type: "A", value: "192.168.1.86" }
+      - { name: "web", type: "A", value: "192.168.1.86" }
       - { name: "ldap-server",   type: "A",   value: "192.168.0.41" }
 
       # Falsificación de soporte (spoof)

