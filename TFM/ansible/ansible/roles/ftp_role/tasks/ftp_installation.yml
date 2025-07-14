@@ -8,9 +8,18 @@
   blockinfile:
     path: /etc/vsftpd.conf
     block: |
-      anonymous_enable=YES
       write_enable=YES
       anon_upload_enable=YES
+      anon_root=/srv/ftp
+
+
+- name: Edit vsftp configuration
+  lineinfile:
+    path: /etc/vsftpd.conf
+    create: yes
+    state: present
+    regexp: "^anonymous_enable=NO\\s+"
+    line: "anonymous_enable=YES"
 
 - name: Open vsftpd port
   firewalld:
@@ -24,4 +33,10 @@
 - name: Start ftp
   service:
     name: vsftpd
-    state: started
+    state: restarted
+
+- name: Set ftp flag
+  copy:
+    src: anonymous_flag.txt
+    dest: /srv/ftp/anonymous_flag.txt
+    mode: '0644'

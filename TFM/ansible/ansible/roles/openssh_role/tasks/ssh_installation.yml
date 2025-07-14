@@ -1,0 +1,27 @@
+
+- name: Install openssh-server
+  apt:
+    name: openssh-server
+    state: latest
+
+- name: Edit sshd configuration
+  lineinfile:
+    path: /etc/ssh/sshd_confing
+    create: yes
+    state: present
+    regexp: "^#PaswordAuthentication yes\\s+"
+    line: "PaswordAuthentication yes"
+
+- name: Edit sshd 60-cloudimg-settings.conf
+  lineinfile:
+    path: /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+    create: yes
+    state: present
+    regexp: "^PaswordAuthentication no\\s+"
+    line: "PaswordAuthentication yes"
+
+- name: Edit sudoers configuration
+  lineinfile:
+    path: /etc/sudoers
+    line: "david ALL=(ALL) NOPASSWD: /usr/bin/vim"
+    insertafter: EOF

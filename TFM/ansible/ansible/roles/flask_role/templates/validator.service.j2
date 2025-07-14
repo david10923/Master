@@ -1,0 +1,12 @@
+[Unit]
+Description=CTF Token Validator Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/validator/app.py
+WorkingDirectory=/opt/validator
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

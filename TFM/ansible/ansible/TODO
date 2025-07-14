@@ -1,4 +1,5 @@
 - DNS clients, now it is working with the non resvol.conf mcli to make it static.
 - Copiar ansible.cfg a /etc/ansibl.cfg para poder lanzar los playboos desde cualquier directorio 
-- Si el dns no funciona hacer un restart 
 - Deshabilitar el acceso con vagrant despues de levantar y configurar la maquina
+- Habilitar tls para consultas ssd-> LDAP 
+    - si se quita ldap_auth_disable_tls_never_use_in_production = true no funciona el loguearse con el user como su - <user>

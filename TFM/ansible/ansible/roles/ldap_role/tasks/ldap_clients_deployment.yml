@@ -1,6 +1,34 @@
 
 - name: Configure slapd client
-  template: 
-    src: ldap.conf.j2
+  copy: 
+    src: ldap.conf
     dest: /etc/ldap/ldap.conf
 
+- name: Set sssd with LDAP
+  apt:
+    name:
+      - sssd-ldap
+    state: present
+
+- name: Stop sssd service
+  service:
+    name: sssd
+    state: stopped
+
+
+- name: Deploy sssd.conf
+  copy:
+    src: sssd.conf  
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: Start and enable sssd service
+  service:
+    name: sssd
+    state: restarted
+    enabled: yes
+
+- name: Execute pam-auth-update to login with ldap users
+  command: "pam-auth-update --enable mkhomedir"

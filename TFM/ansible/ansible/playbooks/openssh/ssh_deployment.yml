@@ -1,0 +1,7 @@
+- hosts: ns1-server-1
+  become: yes
+  tasks:
+  - name: 
+    include_role:
+      name: openssh_role
+      tasks_from: ssh_installation.yml

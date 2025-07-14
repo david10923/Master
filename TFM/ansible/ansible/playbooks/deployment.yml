@@ -1,4 +1,6 @@
 - import_playbook: general_configuration.yml
 - import_playbook: dns/dns_deployment.yml
 - import_playbook: ftp/ftp_deployment.yml
+- import_playbook: flask/flask_deployment.yml
 - import_playbook: ldap/ldap_deployment.yml
+- import_playbook: openssh/ssh_deployment.yml

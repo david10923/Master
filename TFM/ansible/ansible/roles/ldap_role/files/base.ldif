@@ -5,9 +5,9 @@ objectClass: organization
 o: CTF Org
 dc: ctf
 
-dn: ou=People,dc=ctf,dc=local
+dn: ou=users,dc=ctf,dc=local
 objectClass: organizationalUnit
-ou: People
+ou: users
 
 dn: cn=admin,dc=ctf,dc=local
 objectClass: simpleSecurityObject
@@ -15,3 +15,156 @@ objectClass: organizationalRole
 cn: admin
 userPassword: {SSHA}RI8NkN+75nkQUrOQsnxLQbTrlGl8LabC
 description: LDAP administrator
+
+dn: ou=groups,dc=ctf,dc=local
+objectClass: organizationalUnit
+ou: groups
+
+# Grupo POSIX común
+dn: cn=ldapusers,ou=groups,dc=ctf,dc=local
+objectClass: posixGroup
+cn: ldapusers
+gidNumber: 10000
+
+# Usuarios
+
+dn: uid=alice,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Alice Smith
+sn: Smith
+uid: alice
+uidNumber: 10001
+gidNumber: 10000
+homeDirectory: /home/alice
+loginShell: /bin/bash
+mail: alice@ctf.local
+userPassword: {SSHA}gq7qi8cvKK8GMHzfKVJEjRLh5d3Z9Kn8
+# contraseña: alice123
+
+dn: uid=bob,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Bob Johnson
+sn: Johnson
+uid: bob
+uidNumber: 10002
+gidNumber: 10000
+homeDirectory: /home/bob
+loginShell: /bin/bash
+mail: bob@ctf.local
+userPassword: {SSHA}36RtwkxbqTT6EA5tScXZnXiQk6UMH7T2
+# contraseña: bob123
+
+dn: uid=carol,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Carol Williams
+sn: Williams
+uid: carol
+uidNumber: 10003
+gidNumber: 10000
+homeDirectory: /home/carol
+loginShell: /bin/bash
+mail: carol@ctf.local
+userPassword: {SSHA}hTlfRjJvCRN0+lJ7psl8embxHSSEO3eG
+# contraseña: carol123
+
+dn: uid=david,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: David Brown
+sn: Brown
+uid: david
+uidNumber: 10004
+gidNumber: 10000
+homeDirectory: /home/david
+loginShell: /bin/bash
+mail: david@ctf.local
+userPassword: {SSHA}iRJOxbLhQG17kUnQ1Gb0JwFZ+vtyrfkK
+# contraseña: david123
+description: ssh allowed user ${LDAP FLAG}
+
+dn: uid=eve,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Eve Jones
+sn: Jones
+uid: eve
+uidNumber: 10005
+gidNumber: 10000
+homeDirectory: /home/eve
+loginShell: /bin/bash
+mail: eve@ctf.local
+userPassword: {SSHA}D3ZmRcX4iYJwbx3BRkgHwfxQb1rouq/K
+# contraseña: eve123
+
+dn: uid=frank,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Frank Garcia
+sn: Garcia
+uid: frank
+uidNumber: 10006
+gidNumber: 10000
+homeDirectory: /home/frank
+loginShell: /bin/bash
+mail: frank@ctf.local
+userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
+# contraseña: admin123
+
+dn: uid=grace,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Grace Miller
+sn: Miller
+uid: grace
+uidNumber: 10007
+gidNumber: 10000
+homeDirectory: /home/grace
+loginShell: /bin/bash
+mail: grace@ctf.local
+userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
+# contraseña: admin123
+
+dn: uid=heidi,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Heidi Davis
+sn: Davis
+uid: heidi
+uidNumber: 10008
+gidNumber: 10000
+homeDirectory: /home/heidi
+loginShell: /bin/bash
+mail: heidi@ctf.local
+userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
+# contraseña: admin123
+
+dn: uid=ivan,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Ivan Rodriguez
+sn: Rodriguez
+uid: ivan
+uidNumber: 10009
+gidNumber: 10000
+homeDirectory: /home/ivan
+loginShell: /bin/bash
+mail: ivan@ctf.local
+userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
+# contraseña: admin123
+
+dn: uid=judy,ou=users,dc=ctf,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: Judy Martinez
+sn: Martinez
+uid: judy
+uidNumber: 10010
+gidNumber: 10000
+homeDirectory: /home/judy
+loginShell: /bin/bash
+mail: judy@ctf.local
+userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
+# contraseña: admin123

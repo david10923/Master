@@ -1,0 +1,3 @@
+---
+# defaults file for roles/flask_role
+ validator_path: /opt/validator
