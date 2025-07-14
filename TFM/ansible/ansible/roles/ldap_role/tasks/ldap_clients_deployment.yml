@@ -8,7 +8,7 @@
   apt:
     name:
       - sssd-ldap
-    state: present
+    state: latest
 
 - name: Stop sssd service
   service:

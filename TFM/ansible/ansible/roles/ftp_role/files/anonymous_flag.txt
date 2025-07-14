@@ -1,3 +1,4 @@
 Welcome anonymous. {FLAG anonymous}
 Your activity is being logged. Find your way up.
 Hint: The password is encoded... YWRtaW4=
+dns domains ctf.local

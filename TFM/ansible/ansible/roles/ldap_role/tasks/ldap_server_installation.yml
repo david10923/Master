@@ -75,6 +75,24 @@
     group: openldap
     mode: '0750'
 
+- name: Open sldap port
+  firewalld:
+    port: 389/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Open LDAPS port (636/tcp)
+  firewalld:
+    port: 636/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Reload firewall-cmd
+  command: "firewall-cmd --reload"
+
+
 - name: Start and enable OpenLDAP service
   service:
     name: slapd

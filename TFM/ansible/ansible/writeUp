@@ -2,7 +2,7 @@
     - sftp is active 
         - login with user anonymous
 - Look up for flags: 
-    - Get anonymous user with a base64 password
+    - Get anonymous user with a base64 password and dns domain to do a dig query to check subdomains
 - Access the web server in /validate to get the next step info
     - You have to check DNS domains to get the web server where the server is in a subdomain of the zone
     - curl "http://www.ctf.local/validate?token=YWRtaW4=" --header "Host: www.ctf.local"    
