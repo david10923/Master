@@ -19,7 +19,7 @@
   environment:
     DEBIAN_FRONTEND: noninteractive
   register: slapd_install
-  ignore_errors: yes  # ignorar error de inicio fallido si ocurre
+  ignore_errors: yes
 
 - name: Remove sentinel file to re-enable slapd start
   file:
@@ -30,11 +30,6 @@
   file:
     path: /etc/ldap/slapd.d
     state: absent
-
-# - name: Clean LDAP database directory (fresh start)
-#   file:
-#     path: /var/lib/ldap
-#     state: absent
 
 - name: Deploy static slapd.conf
   copy:

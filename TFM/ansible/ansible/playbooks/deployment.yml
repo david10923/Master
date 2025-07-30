@@ -4,3 +4,4 @@
 - import_playbook: flask/flask_deployment.yml
 - import_playbook: ldap/ldap_deployment.yml
 - import_playbook: openssh/ssh_deployment.yml
+- import_playbook: final_configurations.yml

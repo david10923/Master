@@ -8,37 +8,4 @@
     src: resolv.conf.j2
     dest: /etc/resolv.conf
 
-# - name: Obtener conexiones ethernet o wifi gestionadas por NetworkManager
-#   command: nmcli -t -f NAME,TYPE connection show
-#   register: nmcli_connections
 
-# - name: Extraer nombres de conexiones válidas
-#   set_fact:
-#     filtered_connections: >-
-#       {{ nmcli_connections.stdout_lines
-#          | select('match', '^(.*):(ethernet|wifi)$')
-#          | map('regex_replace', '^(.*):.*$', '\\1')
-#          | list }}
-
-# - name: Configurar DNS en cada conexión
-#   command: nmcli con mod "{{ item }}" ipv4.dns "192.168.100.1"
-#   loop: "{{ filtered_connections }}"
-
-# - name: Ignorar DNS automático en cada conexión
-#   command: nmcli con mod "{{ item }}" ipv4.ignore-auto-dns yes
-#   loop: "{{ filtered_connections }}"
-
-# - name: Aplicar dominio de búsqueda en cada conexión
-#   command: nmcli con mod "{{ item }}" ipv4.dns-search "ctf.local"
-#   loop: "{{ filtered_connections }}"
-
-# - name: Activar cada conexión para aplicar cambios
-#   command: nmcli con up "{{ item }}"
-#   loop: "{{ filtered_connections }}"
-
-# - name: Delete /etc/hosts ips
-#   lineinfile:
-#     path: /etc/hosts
-#     create: yes
-#     state: absent
-#     regexp: "^.* {{ dns_main_server }} {{ dns_main_server_alias }}\\s+"

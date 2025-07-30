@@ -1,0 +1,10 @@
+- name: Delete vagrant access to the server
+  hosts: ns1-server-1
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: Edit sudoers configuration
+      lineinfile:
+        path: /etc/sudoers
+        line: "vagrant ALL=(ALL) NOPASSWD: /usr/bin/vim"
+        insertafter: EOF
