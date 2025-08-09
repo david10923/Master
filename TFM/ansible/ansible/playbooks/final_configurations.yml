@@ -4,7 +4,11 @@
   gather_facts: yes
   tasks:
     - name: Edit sudoers configuration
-      lineinfile:
-        path: /etc/sudoers
-        line: "vagrant ALL=(ALL) NOPASSWD: /usr/bin/vim"
-        insertafter: EOF
+      file:
+        path: /etc/sudoers.d/vagrant
+        state: absent
+    - name: Delete user vagrant
+      user:
+        name: vagrant
+        state: absent
+        remove: yes

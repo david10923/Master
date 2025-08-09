@@ -40,7 +40,6 @@ homeDirectory: /home/alice
 loginShell: /bin/bash
 mail: alice@ctf.local
 userPassword: {SSHA}gq7qi8cvKK8GMHzfKVJEjRLh5d3Z9Kn8
-# contraseña: alice123
 
 dn: uid=bob,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -54,7 +53,6 @@ homeDirectory: /home/bob
 loginShell: /bin/bash
 mail: bob@ctf.local
 userPassword: {SSHA}36RtwkxbqTT6EA5tScXZnXiQk6UMH7T2
-# contraseña: bob123
 
 dn: uid=carol,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -68,7 +66,6 @@ homeDirectory: /home/carol
 loginShell: /bin/bash
 mail: carol@ctf.local
 userPassword: {SSHA}hTlfRjJvCRN0+lJ7psl8embxHSSEO3eG
-# contraseña: carol123
 
 dn: uid=david,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -82,7 +79,6 @@ homeDirectory: /home/david
 loginShell: /bin/bash
 mail: david@ctf.local
 userPassword: {SSHA}iRJOxbLhQG17kUnQ1Gb0JwFZ+vtyrfkK
-# contraseña: david123
 description: ssh allowed user ${LDAP FLAG}
 
 dn: uid=eve,ou=users,dc=ctf,dc=local
@@ -97,7 +93,6 @@ homeDirectory: /home/eve
 loginShell: /bin/bash
 mail: eve@ctf.local
 userPassword: {SSHA}D3ZmRcX4iYJwbx3BRkgHwfxQb1rouq/K
-# contraseña: eve123
 
 dn: uid=frank,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -111,7 +106,6 @@ homeDirectory: /home/frank
 loginShell: /bin/bash
 mail: frank@ctf.local
 userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
-# contraseña: admin123
 
 dn: uid=grace,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -125,7 +119,6 @@ homeDirectory: /home/grace
 loginShell: /bin/bash
 mail: grace@ctf.local
 userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
-# contraseña: admin123
 
 dn: uid=heidi,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -139,7 +132,6 @@ homeDirectory: /home/heidi
 loginShell: /bin/bash
 mail: heidi@ctf.local
 userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
-# contraseña: admin123
 
 dn: uid=ivan,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -153,7 +145,6 @@ homeDirectory: /home/ivan
 loginShell: /bin/bash
 mail: ivan@ctf.local
 userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
-# contraseña: admin123
 
 dn: uid=judy,ou=users,dc=ctf,dc=local
 objectClass: inetOrgPerson
@@ -167,4 +158,3 @@ homeDirectory: /home/judy
 loginShell: /bin/bash
 mail: judy@ctf.local
 userPassword: {SSHA}qUQ8WgUBob5TXZkqWD4ME8dCBhC5V3F6
-# contraseña: admin123

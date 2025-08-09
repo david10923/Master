@@ -6,11 +6,11 @@
 
 - name: Edit sshd configuration
   lineinfile:
-    path: /etc/ssh/sshd_confing
+    path: /etc/ssh/sshd_config
     create: yes
     state: present
-    regexp: "^#PaswordAuthentication yes\\s+"
-    line: "PaswordAuthentication yes"
+    regexp: "^#PasswordAuthentication yes\\s+"
+    line: "PasswordAuthentication yes"
 
 - name: Edit sshd 60-cloudimg-settings.conf
   lineinfile:
@@ -18,7 +18,7 @@
     create: yes
     state: present
     regexp: "^PaswordAuthentication no\\s+"
-    line: "PaswordAuthentication yes"
+    line: "PasswordAuthentication yes"
 
 - name: Edit sudoers configuration
   lineinfile:

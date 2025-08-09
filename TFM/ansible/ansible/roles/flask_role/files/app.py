@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, abort
+from flask import Flask, request, jsonify, abort, make_response
 import subprocess
 
 app = Flask(__name__)
@@ -18,9 +18,20 @@ def enforce_hostname():
     if host != ALLOWED_HOST:
         abort(403)
 
+
+@app.errorhandler(403)
+def forbidden(e):
+    return make_response(
+        "Forbidden - Did you forget to set the correct Host header?", 403
+    )
+
+@app.route('/robots.txt')
+def robots():
+    return "Disallow: /\n# Host: www.ctf.local\n"
+
 @app.route('/')
 def index():
-    return "CTF Token Validator Service"
+    return "CTF Token Validator Service, access /validate"
 
 @app.route('/validate', methods=['GET'])
 def validate():
