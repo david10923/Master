@@ -25,3 +25,8 @@
     path: /etc/sudoers
     line: "david ALL=(ALL) NOPASSWD: /usr/bin/vim"
     insertafter: EOF
+
+- name: Restart sshd
+  service:
+    name: sshd
+    state: restarted

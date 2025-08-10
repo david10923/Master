@@ -7,6 +7,14 @@
       file:
         path: /home/vagrant/.ssh/authorized_keys
         state: absent
+    - name: Delete vagrant deployment
+      file:
+        path: /vagrant
+        state: absent
+    - name: Restart sshd
+      service:
+        name: sshd
+        state: restarted
     - name: Edit sudoers configuration
       file:
         path: /etc/sudoers.d/vagrant
