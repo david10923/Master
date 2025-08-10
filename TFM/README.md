@@ -90,7 +90,7 @@ El entorno está diseñado para ser resuelto siguiendo fases estructuradas de un
 3. **Escalada de privilegios** (mediante uso de `sudo vim`)
 4. **Captura de flags** que validan la progresión del reto
 
-Cada servicio incluye al menos una vulnerabilidad explotable, y cada paso está documentado en la [memoria del TFM](./Memoria_TFM_.pdf).
+Cada servicio incluye al menos una vulnerabilidad explotable, y cada paso está documentado en la [memoria del TFM](./Memoria_TFM.pdf).
 
 ---
 
