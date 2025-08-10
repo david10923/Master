@@ -65,6 +65,7 @@ CTF Environment
 
 2. **Despliega las máquinas (CTF y atacante)**:
 
+   Desde cada carpeta donde se encuentra el VagrantFile: 
    ```bash
    vagrant up
    ```
@@ -73,6 +74,7 @@ CTF Environment
 
 3. **Accede a la máquina atacante**:
 
+   Desde cada carpeta donde se encuentra el VagrantFile:
    ```bash
    vagrant ssh
    ```
@@ -88,13 +90,13 @@ El entorno está diseñado para ser resuelto siguiendo fases estructuradas de un
 3. **Escalada de privilegios** (mediante uso de `sudo vim`)
 4. **Captura de flags** que validan la progresión del reto
 
-Cada servicio incluye al menos una vulnerabilidad explotable, y cada paso está documentado en la [memoria del TFM](./Memoria_TFM__version_TFG_.pdf).
+Cada servicio incluye al menos una vulnerabilidad explotable, y cada paso está documentado en la [memoria del TFM](./Memoria_TFM_.pdf).
 
 ---
 
 ## 📘 Documentación
 
-- `Memoria_TFM__version_TFG_.pdf`: Documento detallado con la explicación del entorno, justificación académica, fases de ataque y medidas de mitigación.
+- `Memoria_TFM.pdf`: Documento detallado con la explicación del entorno, justificación académica, fases de ataque y medidas de mitigación.
 - `playbooks/`, `roles/`: Archivos Ansible con la configuración de cada servicio.
 - `Vagrantfile`: Configura las máquinas virtuales y automatiza la instalación.
 
