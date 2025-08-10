@@ -9,7 +9,7 @@
         state: absent
     - name: Delete vagrant deployment
       file:
-        path: /vagrant
+        path: /vagrant/
         state: absent
     - name: Restart sshd
       service:
