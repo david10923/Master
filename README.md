@@ -1,9 +1,7 @@
 
 # 🧠 Máster en Ciberseguridad – IMF x Deloitte
 
-Este repositorio contiene todas las prácticas y el Trabajo de Fin de Máster (TFM) realizados durante el **Máster en Ciberseguridad** impartido por [IMF Smart Education](https://www.imf-formacion.com/) en colaboración con **Deloitte**.
-
-Incluye ejercicios técnicos, laboratorios, automatizaciones y documentación académica orientada a consolidar conocimientos en hacking ético, ciberinteligencia, SIEM, reversing, seguridad móvil y más.
+Este repositorio reúne **todas las prácticas, módulos técnicos y el Trabajo de Fin de Máster (TFM)** desarrollados durante el Máster en Ciberseguridad impartido por IMF Smart Education junto con Deloitte. Cada módulo contiene ejercicios prácticos, documentación, scripts y herramientas aplicadas a situaciones reales en el ámbito de la ciberseguridad ofensiva, defensiva y forense.
 
 ---
 
@@ -11,66 +9,82 @@ Incluye ejercicios técnicos, laboratorios, automatizaciones y documentación ac
 
 ```
 Master/
-├── M1. Ciberinteligencia/        ← Prácticas de OSINT y análisis de amenazas
-├── M2. Hacking ético/           ← Escaneo, enumeración, explotación y post-explotación
-├── M4. Tecnologías SIEM/         ← Splunk, ELK Stack, correlación de eventos
-├── M5. Ingeniería inversa/       ← Análisis estático y dinámico de binarios
-├── M6. Seguridad en smartphones/       ← Seguridad en apps móviles (Android/iOS)
-└── TFM/                           ← Entorno CTF diseñado como trabajo final
+├── M1. Ciberinteligencia/           ← OSINT, análisis de amenazas, técnicas de rastreo
+├── M2. Hacking ético/               ← Reconocimiento, explotación, post-explotación
+├── M3. Desarrollo seguro/           ← Principios de codificación segura, auditoría de código
+├── M4. Tecnologías SIEM/            ← Splunk, ELK, correlación de eventos, análisis de logs
+├── M5. Ingeniería inversa/          ← Análisis estático y dinámico de binarios, reversing
+├── M6. Seguridad en smartphones/    ← Análisis de apps Android/iOS, ingeniería inversa móvil
+├── M7. Análisis forense/            ← Análisis de evidencias, timeline forense, herramientas
+└── TFM/                             ← Entorno CTF automatizado + memoria del trabajo final
 ```
-
-Cada carpeta contiene scripts, informes, configuraciones, capturas de pantalla y documentación generada durante el máster.
 
 ---
 
 ## 🎯 Objetivos del repositorio
 
-- Reunir de forma organizada todos los trabajos realizados en el máster.
-- Facilitar el repaso, consulta y reutilización de conocimientos y herramientas.
-- Servir de portafolio técnico personal.
-- Proporcionar un entorno CTF auto-desplegable y documentado para prácticas.
+- Consolidar todos los conocimientos adquiridos a través de prácticas estructuradas.
+- Simular escenarios reales de seguridad ofensiva y defensiva.
+- Automatizar entornos técnicos utilizando herramientas profesionales.
+- Desarrollar habilidades en análisis forense, inteligencia de amenazas y desarrollo seguro.
+- Documentar y presentar el Trabajo de Fin de Máster como proyecto integral.
 
 ---
 
-## 🧰 Tecnologías y herramientas destacadas
+## 🧰 Herramientas y tecnologías utilizadas
 
-- **Linux / Ubuntu / Kali**
-- **Nmap**, **Nikto**, **John The Ripper**, **Hydra**
-- **Metasploit**, **Burp Suite**, **Wireshark**
-- **Splunk**, **ELK (Elastic, Logstash, Kibana)**
-- **Ansible**, **Vagrant**, **VirtualBox**
-- **Python**, **Jinja2**
-- **OpenLDAP**, **BIND9**, **Flask**, **vsftpd**
-- **APKTool**, **MobSF**, **Ghidra**, **IDA Free**
+- **Linux, Ubuntu, Kali, Windows** (entornos híbridos)
+- **Ansible**, **Vagrant**, **VirtualBox** – Infraestructura como código
+- **Nmap**, **Metasploit**, **Burp Suite**, **John the Ripper**
+- **Splunk**, **ELK (Elasticsearch, Logstash, Kibana)** – SIEM
+- **Ghidra**, **IDA Free**, **APKTool**, **MobSF** – Ingeniería inversa y móvil
+- **Python**, **Bash**, **Jinja2**
+- **Wireshark**, **Autopsy**, **Volatility** – Análisis forense
+- **Flask**, **OpenLDAP**, **BIND9**, **vsftpd**, etc.
 
 ---
 
-## 📌 Trabajo de Fin de Máster (TFM)
+## 🏁 Trabajo de Fin de Máster (TFM)
 
 El directorio `TFM/` incluye:
 
-- Un entorno **CTF vulnerable** configurado con Ansible y Vagrant.
-- Servicios inseguros desplegados automáticamente (DNS, LDAP, WebApp, FTP, SSH).
-- Máquina atacante basada en Kali Linux.
-- Resolución paso a paso de las vulnerabilidades.
-- Documento académico `Memoria_TFM__version_TFG_.pdf` detallando la arquitectura, herramientas, explotación y mitigaciones.
-
-Ver README específico en [`TFM/`](./TFM/) para más detalles.
+- Un entorno tipo **Capture The Flag (CTF)** con múltiples servicios vulnerables.
+- Configuración automatizada con Vagrant y Ansible.
+- Máquina atacante basada en Kali Linux y máquina víctima con servicios DNS, LDAP, FTP, Flask, SSH.
+- Resolución paso a paso: reconocimiento, explotación, escalada, mitigación.
+- Memoria técnica (`Memoria_TFM.pdf`) con justificación académica.
 
 ---
 
-## 🛡️ Licencia y uso
+## ✅ Requisitos para usar el entorno
 
-Este repositorio tiene un fin **formativo y académico**. No debe utilizarse en entornos reales sin consentimiento explícito de los propietarios de los sistemas involucrados.
+- [VirtualBox](https://www.virtualbox.org/)
+- [Vagrant](https://www.vagrantup.com/)
+- Git
 
-El autor no se responsabiliza del mal uso del contenido.
+### Despliegue rápido del entorno CTF
+
+```bash
+git clone https://github.com/david10923/Master.git
+cd Master/TFM/ansible/ansible
+vagrant up         # Despliega el entorno
+vagrant ssh        # Accede a la máquina atacante
+```
+
+---
+
+## 📚 Licencia y uso
+
+Este contenido ha sido creado con fines **formativos y académicos exclusivamente**. Su uso indebido en sistemas reales sin autorización está **prohibido**. El autor no se responsabiliza por un mal uso.
 
 ---
 
 ## ✍️ Autor
 
 **David Fernández Alejo**  
-Máster en Ciberseguridad · Promoción 2024–2025  
+Máster en Ciberseguridad · Promoción 2023–2025  
 Tutor TFM: Raimundo Alcázar Quesada
 
 ---
+
+> “Todo lo que tenemos que decidir es qué hacer con el tiempo que se nos da.” – *Gandalf*
