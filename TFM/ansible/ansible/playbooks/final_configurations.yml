@@ -5,10 +5,9 @@
   tasks:
     - name: Edit sudoers configuration
       file:
+        path: /home/vagrant/.ssh/authorized_keys
+        state: absent
+    - name: Edit sudoers configuration
+      file:
         path: /etc/sudoers.d/vagrant
         state: absent
-    - name: Delete user vagrant
-      user:
-        name: vagrant
-        state: absent
-        remove: yes
